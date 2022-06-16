@@ -94,7 +94,7 @@ $Guardado=Array();
 		if($fila->isEmpty())
 		{
 			$si="La cadena es palindroma.";
-			echo "<br>";
+			echo $si."<br>";
 			$Guardado[$c]=$si;
 		}
 		else
