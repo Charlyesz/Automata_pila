@@ -2,10 +2,10 @@
 	$Guardado=Array(); //Crea el arreglo 
 ?>
 <html>
-<title>Practica del Segundo Parcial</title>
+<title>Practica No. 5</title>
 <body>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<h1><center> Practica Del segundo parcial <br /></center></h1>
+	<h1><center> Practica No. 5 <br /></center></h1>
 	<center> Automata a Pila Vacia </center>
 	<center>Ingreso de caracteres manualmente (Max 20) o Aleatorio</center>
 <form method="post" align="center">
@@ -165,9 +165,8 @@
 </body>
 <footer>
 		
-			<center><h4>Ávila Juárez Alexis Aramis</h4></center>
-			<center><h4>Gomez Cruz Marco Antonio</h4></center>
-			<center><h4>4CV3</h4></center>
+			<center><h4>Sanchez Zavala Carlos Enrique</h4></center>
+			<center><h4>2CM11</h4></center>
 			<center><h4>Teoria Computacional</h4></center>
 		
 </footer>
