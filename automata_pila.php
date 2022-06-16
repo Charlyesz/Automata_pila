@@ -1,18 +1,18 @@
 <?php
-$Guardado=Array();
+	$Guardado=Array(); //Crea el arreglo 
 ?>
 <html>
-<title>Practica No. 5</title>
+<title>Practica del Segundo Parcial</title>
 <body>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<h1><center> Practica No. 5 <br /></center></h1>
-	<center> Automata Pila </center>
-	<center>Manual (Max 20) o aleatorio</center>
+	<h1><center> Practica Del segundo parcial <br /></center></h1>
+	<center> Automata a Pila Vacia </center>
+	<center>Ingreso de caracteres manualmente (Max 20) o Aleatorio</center>
 <form method="post" align="center">
 <h4>Ingresa tu cadena iniciando con 0 ó escribe aleatorio<input class="boton" type="search" name="total" MAXLENGTH=20 size="25"><a><input type="submit" class="boton" value="Generar"></a></h4>
 </form>
 <?php
-	$cadena=$_POST['total'];
+	$cadena=$_POST['total']; //El campo de texto donde se escribre la cadena de 0,1 o la palabra aleatoria
 	class Pila {
 			//variable $pila que conteinen el arreglo tipo pila
 			public $pila;
@@ -47,132 +47,128 @@ $Guardado=Array();
 				return $this->pila[($this->length()-1)];
 			}
 		}
-		function generate_string($length) {
-		    $characters = '01';
-		    $charactersLength = strlen($characters);
+		function generate_string($length) {  //Funcion donde se genera la cadena
+		    $characters = '01'; //Caracteres de 01
+		    $charactersLength = strlen($characters); //Lee los caracteres
 		    $randomString = '';
-		    for ($i = 0; $i < $length; $i++) {
+		    for ($i = 0; $i < $length; $i++) { //Ciclo donde se genera la cadena completa del tamaño n
 		        $randomString .= $characters[rand(0, $charactersLength - 1)];
 		    }
-		    return $randomString;
+		    return $randomString; //Regresa la cadena creada
 		} 
-	if($cadena<>"aleatorio")
+	if($cadena<>"aleatorio")  // Lee se en el campo POST si es la cadena 01 manual o aleatorio
 	{
-		$tamaño = strlen($cadena)-1;
-		$fila = new Pila($tamaño);
-		$manual=fopen("manual_automata_pila.txt","w");
-		$a=0;
-		$c=0;
-		echo "<center>Proceso automata pila manual</center><br/><br/>";
-		while($a<=$tamaño)
+		$tamaño = strlen($cadena)-1; // Lee el tamaño de la cadena manual
+		$fila = new Pila($tamaño); // Crea la pila
+		$manual=fopen("manual_automata_pila.txt","w"); // Crea o sobre-escribe el archivo txt
+		$c=$a=0;
+		while($a<=$tamaño) // Ciclo donde recorre el tamaño de la cadena
 		{
-			$numero=$cadena[$a];
-			$z=substr($cadena,$a);
-			echo $z."<br/>";
-			if($numero==0)
+			$numero=$cadena[$a]; //Guarda la posicion de la cadena en la variable numero
+			$z=substr($cadena,$a); //Extrae el caracter de la cadena
+			echo $z."<br/>"; //Imprime el caracter
+			if($numero==0) //Analiza si es cero el caracter
 			{
-				$fila->push('X');
-				$Guardado[$c]=$z;
-				$c++;
-				print_r($fila);
-				$Guardado[$c]=print_r($fila,true);
-				echo "<br/>";
-				$c++;
+				$fila->push('X'); //Apila en la pila
+				$Guardado[$c]=$z; //Guarda en el arreglo para mostrar lo en el txt
+				$c++; //Suma en el contador de control
+				print_r($fila); //Muestra la Pila
+				$Guardado[$c]=print_r($fila,true); //Guarda el muestro de la pila y lo muestra en el txt
+				echo "<br/>"; //Salto de linea
+				$c++; //Suma en el contador de control
 			}
-			elseif($numero==1)
+			elseif($numero==1) //Analiza si es un 1 el caracter
 				{
-					$fila->pop();
-					$Guardado[$c]=$z;
-					$c++;
-					print_r($fila);
-					$Guardado[$c]=print_r($fila,true);
-					echo "<br/>";
-					$c++;
+					$fila->pop(); //Desapila de la pila
+					$Guardado[$c]=$z; //Guarda en el arreglo para mostrar lo en el txt
+					$c++; //Suma en el contador de control
+					print_r($fila); //Muestra la Pila
+					$Guardado[$c]=print_r($fila,true); //Guarda el muestro de la pila y lo muestra en el txt
+					echo "<br/>"; //Salto de linea
+					$c++; //Suma en el contador de control
 				}
-		$a++;
+		$a++; // Suma en la posicion de la cadena
 		}
-		if($fila->isEmpty())
-		{
-			$si="La cadena es palindroma.";
-			echo $si."<br>";
-			$Guardado[$c]=$si;
+		if($fila->isEmpty()) // Analiza si al Pila esta vacia
+		{ // Si esta vacia es una cadena Palindroma
+			$si="La cadena es palindroma."; 
+			echo $si. "<br>";
+			$Guardado[$c]=$si; //Se guarda en el arreglo para mostrar en el txt
 		}
 		else
-		{
+		{ // Si no esta vacia es una cadena no Palindroma
 			$no="La cadena no es palindroma.";
 			echo $no."<br>";
-			$Guardado[$c]=$si;
+			$Guardado[$c]=$no; //Se guarda en el arreglo para mostrar en el txt
 		}
-		foreach ($Guardado as $key => $value) 
+		foreach ($Guardado as $key => $value) // Se muestra todo el arreglo y se guarda en el txt
 		{
 			fwrite($manual,$value.PHP_EOL);
 		}
-		fclose($manual);
+		fclose($manual); // Se cierra el archivo txt
 	}
 	else
 	{
-		$numero=rand(21,1000);
-		$cad=generate_string($numero);
-		$fila = new Pila($numero);
-		$aleatorio=fopen("aleatorio_automata_pila.txt","w");
-		$d=0;
-		$b=0;
+		$numero=rand(21,100); // Se genera un valor aleatorio para el tamaño de la cadena
+		$cad=generate_string($numero); // Genera la cadena de 01 de tamaño n
+		$fila = new Pila($numero); // Crea la pila
+		$aleatorio=fopen("aleatorio_automata_pila.txt","w"); // Crea el archvio o sobre-escribe el archivo
+		$d=$b=0; 
 		echo $cad."<br/>";
 		echo "<center>Proceso automata pila aleatorio</center><br/><br/>";
-		while($b<$numero)
+		while($b<$numero) //Ciclo donde recorre el tamaño de la cadena
 		{
-			$posicion=$cad[$b];
-			$z=substr($cad,$b);
-			echo $z."<br/>";
-			if($posicion==0)
+			$posicion=$cad[$b]; //Guarda la posicion de la cadena en la variable numero
+			$z=substr($cad,$b); //Extrae el caracter de la cadena
+			echo $z."<br/>"; //Imprime el caracter
+			if($posicion==0) //Analiza si es cero el caracter
 			{
-				$fila->push('X');
-				$Guardado[$d]=$z;
-				$d++;
-				print_r($fila);
-				$Guardado[$d]=print_r($fila,true);
-				echo "<br/>";
-				$d++;
+				$fila->push('X'); //Apila en la pila
+				$Guardado[$d]=$z; //Guarda en el arreglo para mostrar lo en el txt
+				$d++; //Suma en el contador de control
+				print_r($fila); //Muestra la Pila
+				$Guardado[$d]=print_r($fila,true); //Guarda el muestro de la pila y lo muestra en el txt
+				echo "<br/>"; //Salto de linea
+				$d++; //Suma en el contador de control
 			}
-			elseif($posicion==1)
+			elseif($posicion==1) //Analiza si es un 1 el caracter
 				{
-					$fila->pop();
-					$Guardado[$d]=$z;
-					$d++;
-					print_r($fila);
-					$Guardado[$d]=print_r($fila,true);
-					echo "<br/>";
-					$d++;
+					$fila->pop(); //Desapila de la pila
+					$Guardado[$d]=$z; //Guarda en el arreglo para mostrar lo en el txt
+					$d++; //Suma en el contador de control
+					print_r($fila); //Muestra la Pila
+					$Guardado[$d]=print_r($fila,true); //Guarda el muestro de la pila y lo muestra en el txt
+					echo "<br/>"; //Salto de linea
+					$d++; //Suma en el contador de control
 				}
-			$b++;
+			$b++; // Suma en la posicion de la cadena
 			}
-		if($fila->isEmpty())
-		{
+		if($fila->isEmpty()) // Analiza si al Pila esta vacia
+		{ // Si esta vacia es una cadena Palindroma
 			$si="La cadena es palindroma.";
 			echo $si."<br>";
-			$Guardado[$d]=$si;
+			$Guardado[$d]=$si; //Se guarda en el arreglo para mostrar en el txt
 		}
 		else
-		{
+		{ // Si no esta vacia es una cadena no Palindroma
 			$no="La cadena no es palindroma.";
 			echo $no."<br/>";
-			$Guardado[$d]=$no;
+			$Guardado[$d]=$no; //Se guarda en el arreglo para mostrar en el txt
 		}
-		foreach ($Guardado as $key => $value) 
+		foreach ($Guardado as $key => $value) // Se muestra todo el arreglo y se guarda en el txt
 		{
 			fwrite($aleatorio,$value.PHP_EOL);
 		}
-		fclose($aleatorio);
+		fclose($aleatorio); // Se cierra el archivo txt
 	}
 ?>
 </body>
 <footer>
-	<table align="center">
-		<tr>
-			<th>Sanchez Zavala Carlos Enrique</th>
-			<th>2CM11</th>
-			<th>Teoria Computacional</th>
-		</tr>
-	</table>
+		
+			<center><h4>Ávila Juárez Alexis Aramis</h4></center>
+			<center><h4>Gomez Cruz Marco Antonio</h4></center>
+			<center><h4>4CV3</h4></center>
+			<center><h4>Teoria Computacional</h4></center>
+		
 </footer>
 </html>
